@@ -1,0 +1,64 @@
+<div class="card mt-3">
+  <div class="card-content">
+    <div class="field has-addons">
+      <div class="control">
+        <input class="input" type="text" [(ngModel)]="filter" placeholder="Filtro de Nombre">
+      </div>
+      <div class="control">
+        <button class="button is-info" (click)="onFilter()">Buscar</button>
+      </div>
+    </div>
+    <table class="table is-fullwidth is-striped">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let post of (posts$ | async)?.slice((p - 1) * itemsPerPage, p * itemsPerPage)">
+          <td>{{ post.name }}</td>
+          <td>{{ post.description }}</td>
+          <td>
+            <button class="button is-danger" (click)="post.id !== undefined && onDelete(post.id)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+      <a class="pagination-previous" [class.is-disabled]="p === 1" (click)="onPageChange(p - 1)" [attr.disabled]="p === 1 ? true : null">Previous</a>
+      <a class="pagination-next" [class.is-disabled]="p === Math.ceil(totalItems / itemsPerPage)" (click)="onPageChange(p + 1)" [attr.disabled]="p === Math.ceil(totalItems / itemsPerPage) ? true : null">Next page</a>
+      <ul class="pagination-list">
+        <li *ngFor="let page of [].constructor(Math.ceil(totalItems / itemsPerPage)); let i = index">
+          <a class="pagination-link" [class.is-current]="p === i + 1" (click)="onPageChange(i + 1)">{{ i + 1 }}</a>
+        </li>
+      </ul>
+    </nav>
+    <form [formGroup]="postForm" (ngSubmit)="onCreate()">
+      <div class="field">
+        <label class="label">Nombre</label>
+        <div class="control">
+          <input class="input" type="text" formControlName="name" placeholder="Nombre">
+        </div>
+        <p class="help is-danger" *ngIf="postForm.get('name')?.invalid && postForm.get('name')?.touched">
+          El nombre es requerido y debe tener al menos 3 caracteres.
+        </p>
+      </div>
+      <div class="field">
+        <label class="label">Descripción</label>
+        <div class="control">
+          <input class="input" type="text" formControlName="description" placeholder="Descripción">
+        </div>
+        <p class="help is-danger" *ngIf="postForm.get('description')?.invalid && postForm.get('description')?.touched">
+          La descripción es requerida y debe tener al menos 3 caracteres.
+        </p>
+      </div>
+      <div class="field">
+        <div class="control">
+          <button class="button is-primary" type="submit">Crear</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+body {
+    background-color: #2c3e50; /* Fondo oscuro */
+    color: #ecf0f1; /* Texto claro */
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .table {
+    color: #ecf0f1; /* Asegura que el texto de la tabla sea claro */
+  }
+  
+  .custom-pagination .ngx-pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .custom-pagination .ngx-pagination a,
+  .custom-pagination .ngx-pagination span {
+    color: #ecf0f1 !important; /* Color del texto claro */
+    background-color: #34495e !important; /* Fondo oscuro */
+    padding: 5px 10px;
+    margin: 0 2px;
+    border-radius: 3px;
+    text-decoration: none;
+    border: 1px solid #ecf0f1;
+  }
+  
+  .custom-pagination .ngx-pagination a:hover,
+  .custom-pagination .ngx-pagination span:hover {
+    background-color: #1abc9c !important; /* Color de fondo al pasar el cursor */
+    color: #ffffff !important; /* Color del texto al pasar el cursor */
+  }
+  
+  .custom-pagination .ngx-pagination .current {
+    background-color: #e74c3c !important; /* Color de fondo para la página actual */
+    color: #ffffff !important; /* Color del texto para la página actual */
+    font-weight: bold;
+  }
+  
